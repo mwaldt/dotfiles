@@ -1,0 +1,33 @@
+
+# bash
+alias restart='sudo reboot'
+alias shutdown='sudo halt'
+alias apt-get='sudo apt-get'
+alias root='sudo su -'
+alias sp='source ~/.bash_profile'
+
+alias rcd='cd -'
+alias ..='cd ../'
+alias ...='cd ../../'
+alias .3='cd ../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../../'
+alias .6='cd ../../../../../../'
+
+alias cp='cp -i'
+alias mv='mv -i'
+alias ll='ls -FGlAhp'
+alias less='less -FRXc'
+alias qfind="find . -name "
+alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
+
+# git
+alias g="git"
+alias gs='git status'
+alias gl='git log'
+alias gd='git diff'
+alias gb='git branch'
+alias gau="git add -u"
+alias gaa="git add -A"
+alias gds='git diff --staged'
+alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"

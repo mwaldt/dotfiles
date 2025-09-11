@@ -1,0 +1,17 @@
+# set PATH so it includes user's private bin if it exists
+if [[ -d "$HOME/bin" ]]; then
+        PATH="$HOME/bin:$PATH"
+fi
+
+
+# Ignore CTRL-D for five times before exiting shell
+export IGNOREEOF=5
+
+# bash_history tweaks
+shopt -s histappend
+shopt -s cmdhist
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
+export HISTCONTROL=ignoreboth
+export HISTIGNORE='jobs:ls:bg:fg:history'
+export HISTTIMEFORMAT='%F %T '

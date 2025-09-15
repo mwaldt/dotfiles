@@ -1,8 +1,30 @@
+# Ensure some basic path element
+PATH="$PATH:/usr/local/bin:/usr/local/sbin:/Users/$USER/.cargo/bin:/Users/$USER/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+if [[ "$OSTYPE" == "dawrin"* ]]
+then
+    PATH="$PATH:/Applications/iTerm 2.app/Contents/Resources/utilities"
+fi
+# set PATH so it includes user's private bin if it exists
+if [[ -d "$HOME/bin" ]]; then
+     PATH="$HOME/bin:$PATH"
+fi
+
+ # xdg-derived, systemd file-hierarchy
+if [[ -d "$HOME/.local/bin" ]]; then
+     PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [[ -d "$HOME/.files/bin" ]]; then
+     PATH="$HOME/.files/bin:$PATH"
+fi
+
+# brew is getting removed from my shell path somehow...
+#
+eval "$(/usr/local/bin/brew shellenv)"
 # my goofing around with prompt
 # PS1="\\e[35m\u@\\e[34m\h (\\e[94m\w):\e[39m"
 
 
-# set PATH so it includes user's private bin if it exists
  if [[ "$OSTYPE" == "darwin"* ]]
  then
      # Enhanced git status function for prompt

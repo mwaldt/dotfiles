@@ -63,3 +63,4 @@ export HISTIGNORE='jobs:ls:bg:fg:history'
 export HISTTIMEFORMAT='%F %T '
 
 . "$HOME/.local/bin/env"
+

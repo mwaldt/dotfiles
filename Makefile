@@ -42,6 +42,39 @@ else
 	@echo "Skipping brew installation (not on macOS)"
 endif
 
+.PHONY: python
+install-python:
+	brew install python
+	@grep -Fqx 'export PATH="$$(brew --prefix python)/libexec/bin:$$PATH"' "$$HOME/.zprofile" 2>/dev/null || \
+		printf '%s\n' 'export PATH="$$(brew --prefix python)/libexec/bin:$$PATH"' >> "$$HOME/.zprofile"
+	@echo 'Added Python alias to ~/.zprofile; restart your shell or run: source ~/.zprofile'
+
+.PHONY: setup-mise
+setup-mise:
+	brew install mise
+	@grep -Fqx 'eval "$$(mise activate zsh)"' "$$HOME/.zshrc" 2>/dev/null || \
+		printf '%s\n' 'eval "$$(mise activate zsh)"' >> "$$HOME/.zshrc"
+	@echo 'Mise added to ~/.zshrc; open a new iTerm2 tab to activate it.'
+
+.PHONY: install-ruby-rails
+install-ruby-rails: setup-mise
+	mise use --global ruby@latest
+	mise exec -- gem install rails
+	mise exec -- rails --version
+
+.PHONY: install-go
+install-go: setup-mise
+	mise use --global go@latest
+	mise exec -- go version
+
+.PHONY: install-javascript
+install-javascript: setup-mise
+	mise use --global node@lts
+	mise exec -- npm install --global @angular/cli
+	mise exec -- node --version
+	mise exec -- npm --version
+	mise exec -- ng version
+
 .PHONY: clean
 clean:
 	@echo "Cleaning up symbolic links..."
@@ -50,5 +83,5 @@ clean:
 	@echo "Cleanup complete!"
 
 .PHONY: all
-all: bash tmux vim git brew
+all: bash tmux vim git brew install-python setup-mise install-ruby-rails install-go install-javascript
 	@echo "All dotfiles have been set up!"
